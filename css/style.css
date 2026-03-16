@@ -348,12 +348,36 @@ img {
   height: 8px;
   background: #4ade80;
   border-radius: 50%;
-  animation: pulse-dot 2s ease-in-out infinite;
+  position: relative;
+  flex-shrink: 0;
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
+.badge-dot::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: online-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.badge-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: online-blink 3s ease-in-out infinite;
+}
+
+@keyframes online-ping {
+  0% { transform: scale(1); opacity: 0.6; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes online-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 .hero-name {
@@ -1552,6 +1576,8 @@ img {
   .book-3d {
     width: 180px;
     height: 255px;
+    animation: none !important;
+    transform: rotateY(-20deg) rotateX(2deg) !important;
   }
 
   .book-front, .book-back {
@@ -1574,6 +1600,16 @@ img {
 
   .book-description {
     font-size: 0.9rem;
+  }
+
+  /* Book section — extra bottom padding so nav doesn't overlap */
+  .book-section {
+    padding-bottom: 6rem;
+  }
+
+  /* Contact section — extra bottom padding on mobile */
+  .contact-section {
+    padding-bottom: 7rem;
   }
 
   /* Contact */
