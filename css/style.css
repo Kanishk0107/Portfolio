@@ -1064,6 +1064,11 @@ img {
   100% { transform: rotateY(-35deg) rotateX(2deg); }
 }
 
+@keyframes bookSpin {
+  from { transform: rotateY(0deg) rotateX(5deg); }
+  to { transform: rotateY(360deg) rotateX(5deg); }
+}
+
 .book-face {
   position: absolute;
   backface-visibility: hidden;
@@ -1576,14 +1581,40 @@ img {
   .book-3d {
     width: 180px;
     height: 255px;
-    animation: none !important;
-    transform: rotateY(-20deg) rotateX(2deg) !important;
+    animation: bookSpin 15s linear infinite;
   }
 
   .book-front, .book-back {
     width: 180px;
     height: 255px;
   }
+
+  /* Precise resizing for 3D edges on mobile */
+  .book-spine-face {
+    height: 255px;
+    width: 25px;
+    left: -12.5px;
+  }
+
+  .book-top, .book-bottom {
+    width: 180px;
+    height: 25px;
+    top: -12.5px;
+  }
+
+  .book-bottom {
+    top: auto;
+    bottom: -12.5px;
+  }
+
+  .book-pages-edge {
+    width: 25px;
+    height: 255px;
+    right: -12.5px;
+  }
+
+  .book-front { transform: translateZ(12.5px); }
+  .book-back { transform: rotateY(180deg) translateZ(12.5px); }
 
   .book-title {
     font-size: 1.8rem;
