@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Kanishk Bhardwaj</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/blog-reading.css">
+</head>
+<body class="theme-light tone-neutral" id="readingPage">
+
+  <!-- Controls Panel -->
+  <div class="reading-controls" id="readingControls">
+    <button class="controls-toggle" id="controlsToggle" aria-label="Toggle reading controls">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
+      </svg>
+    </button>
+    <div class="controls-panel" id="controlsPanel">
+      <!-- Theme -->
+      <div class="control-group">
+        <label class="control-label">Theme</label>
+        <div class="control-row">
+          <button class="ctrl-btn active" data-theme="light" onclick="setTheme('light')">☀️ Day</button>
+          <button class="ctrl-btn" data-theme="dark" onclick="setTheme('dark')">🌙 Night</button>
+        </div>
+      </div>
+      <!-- Brightness -->
+      <div class="control-group">
+        <label class="control-label">Brightness <span id="brightnessVal">100</span>%</label>
+        <input type="range" min="50" max="100" value="100" id="brightnessSlider"
+               oninput="setBrightness(this.value)" class="ctrl-slider">
+      </div>
+      <!-- Tone -->
+      <div class="control-group">
+        <label class="control-label">Tone</label>
+        <div class="control-row">
+          <button class="ctrl-btn" data-tone="warm" onclick="setTone('warm')">🔥 Warm</button>
+          <button class="ctrl-btn active" data-tone="neutral" onclick="setTone('neutral')">⚪ Neutral</button>
+          <button class="ctrl-btn" data-tone="cool" onclick="setTone('cool')">❄️ Cool</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <a href="index.html#blog" class="back-btn" aria-label="Back to portfolio">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Back
+  </a>
+
+  <!-- Article -->
+  <main class="reading-wrapper" id="readingWrapper">
+    <div class="reading-inner">
+      <!-- Hero Image -->
+      <div class="blog-hero" id="blogHero">
+        <img id="heroImg" src="" alt="" loading="eager">
+      </div>
+
+      <!-- Article Content -->
+      <article class="article-content" id="articleContent">
+        <div class="article-meta" id="articleMeta"></div>
+        <h1 class="article-title" id="articleTitle"></h1>
+        <div class="article-byline" id="articleByline"></div>
+        <div class="article-body" id="articleBody"></div>
+      </article>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script>
+    // ── Get slug from URL ──
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+    const blogs = window.getBlogs ? window.getBlogs() : [];
+    const blog = blogs.find(b => b.slug === slug);
+
+    if (blog) {
+      document.title = blog.title + ' — Kanishk Bhardwaj';
+      document.getElementById('heroImg').src = blog.coverImage;
+      document.getElementById('heroImg').alt = blog.title;
+      document.getElementById('articleTitle').textContent = blog.title;
+      document.getElementById('articleMeta').innerHTML =
+        `<span class="meta-tag">${blog.tag}</span>`;
+      document.getElementById('articleByline').innerHTML =
+        `<span>${blog.date}</span><span class="byline-dot">·</span><span>${blog.readTime} min read</span><span class="byline-dot">·</span><span>Kanishk Bhardwaj</span>`;
+      document.getElementById('articleBody').innerHTML = blog.content;
+    } else {
+      document.getElementById('articleTitle').textContent = 'Post not found';
+      document.getElementById('articleBody').innerHTML =
+        '<p>This post doesn\'t exist. <a href="index.html#blog">Go back to the blog.</a></p>';
+    }
+
+    // ── Reading Controls ──
+    function setTheme(theme) {
+      const page = document.getElementById('readingPage');
+      page.classList.remove('theme-light', 'theme-dark');
+      page.classList.add('theme-' + theme);
+      document.querySelectorAll('[data-theme]').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-theme="' + theme + '"]').classList.add('active');
+    }
+
+    function setBrightness(val) {
+      document.getElementById('brightnessVal').textContent = val;
+      document.getElementById('readingWrapper').style.opacity = val / 100;
+    }
+
+    function setTone(tone) {
+      const page = document.getElementById('readingPage');
+      page.classList.remove('tone-warm', 'tone-neutral', 'tone-cool');
+      page.classList.add('tone-' + tone);
+      document.querySelectorAll('[data-tone]').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-tone="' + tone + '"]').classList.add('active');
+    }
+
+    // ── Toggle controls panel ──
+    document.getElementById('controlsToggle').addEventListener('click', () => {
+      document.getElementById('readingControls').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

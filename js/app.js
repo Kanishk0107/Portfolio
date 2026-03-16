@@ -27,57 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 2200);
 
   // ─────────────────────────────────────────────────
-  // 2. CUSTOM CURSOR
+  // 2. CUSTOM CURSOR — DISABLED (using default cursor)
   // ─────────────────────────────────────────────────
   const dot = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0;
-  let dotX = 0, dotY = 0;
-  let ringX = 0, ringY = 0;
+  if (dot) dot.style.display = 'none';
+  if (ring) ring.style.display = 'none';
 
-  if (!prefersReducedMotion) {
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-      dotX += (mouseX - dotX) * 0.25;
-      dotY += (mouseY - dotY) * 0.25;
-      dot.style.left = dotX + 'px';
-      dot.style.top = dotY + 'px';
-
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
-
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Hover states
-    function attachCursorHover(elements) {
-      elements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          dot.classList.add('hovering');
-          ring.classList.add('hovering');
-        });
-        el.addEventListener('mouseleave', () => {
-          dot.classList.remove('hovering');
-          ring.classList.remove('hovering');
-        });
-      });
-    }
-
-    attachCursorHover(document.querySelectorAll(
-      'a, button, .project-card, .contact-social-btn, .skill-chip, .timeline-card, .social-icon-btn'
-    ));
-  } else {
-    if (dot) dot.style.display = 'none';
-    if (ring) ring.style.display = 'none';
-    document.body.style.cursor = 'auto';
-  }
+  // Stub so cursor hover attachment calls don't break
+  function attachCursorHover() {}
 
   // ─────────────────────────────────────────────────
   // 3. FLOATING NAVIGATION
@@ -247,6 +205,21 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 0.8,
         ease: 'power3.out'
       });
+
+      // Blog cards
+      ScrollTrigger.batch('.blog-card', {
+        onEnter: batch => {
+          gsap.from(batch, {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out'
+          });
+        },
+        start: 'top 85%',
+        once: true
+      });
     });
   }
 
@@ -291,26 +264,12 @@ document.addEventListener('DOMContentLoaded', () => {
         </article>`;
     }).join('');
 
-    // Re-attach cursor hover
-    if (!prefersReducedMotion) {
-      attachCursorHover(document.querySelectorAll('.project-card, .btn-view-project'));
-    }
+    // Re-attach cursor hover (no-op now)
+    attachCursorHoverNoop();
   }
 
   // Helper function available in scope
-  function attachCursorHover(elements) {
-    if (!dot || !ring) return;
-    elements.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        dot.classList.add('hovering');
-        ring.classList.add('hovering');
-      });
-      el.addEventListener('mouseleave', () => {
-        dot.classList.remove('hovering');
-        ring.classList.remove('hovering');
-      });
-    });
-  }
+  function attachCursorHoverNoop() {}
 
   // ─────────────────────────────────────────────────
   // 7. RENDER TIMELINE
@@ -327,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    container.innerHTML = timelineData.map(item => {
+    container.innerHTML = timelineData.map((item, index) => {
       const badgeClass = {
         education: 'badge-education',
         work: 'badge-work',
@@ -342,10 +301,21 @@ document.addEventListener('DOMContentLoaded', () => {
         achievement: '🏆 Achievement'
       }[item.type] || item.type;
 
+      // First item gets the live blinking dot
+      const liveDot = index === 0 ? `
+        <div class="live-dot-wrapper">
+          <div class="live-dot">
+            <div class="live-dot-inner"></div>
+            <div class="live-dot-ping"></div>
+          </div>
+          <span class="live-label">Current</span>
+        </div>` : '';
+
       return `
-        <div class="timeline-item">
+        <div class="timeline-item${index === 0 ? ' current' : ''}">
           <span class="timeline-date">${item.date}</span>
           <div class="timeline-card">
+            ${liveDot}
             <span class="timeline-type-badge ${badgeClass}">${typeLabel}</span>
             <h3>${item.title}</h3>
             <p class="timeline-place">${item.place}</p>
@@ -353,11 +323,6 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>`;
     }).join('');
-
-    // Re-attach cursor hover
-    if (!prefersReducedMotion) {
-      attachCursorHover(document.querySelectorAll('.timeline-card'));
-    }
   }
 
   // ─────────────────────────────────────────────────
@@ -504,10 +469,70 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─────────────────────────────────────────────────
+  // 12. RENDER BLOG
+  // ─────────────────────────────────────────────────
+  function renderBlog() {
+    const blogs = window.getBlogs ? window.getBlogs() : [];
+    const grid = document.getElementById('blogGrid');
+    if (!grid) return;
+
+    if (!blogs.length) {
+      grid.innerHTML = `<p style="color:var(--text-muted);text-align:center;grid-column:1/-1">No posts yet.</p>`;
+      return;
+    }
+
+    grid.innerHTML = blogs.map(blog => `
+      <article class="glow-card blog-card" data-slug="${blog.slug}" role="button" tabindex="0"
+               aria-label="Read: ${blog.title}"
+               onclick="openBlog('${blog.slug}')"
+               onkeydown="if(event.key==='Enter')openBlog('${blog.slug}')">
+        <div class="blog-card-bg">
+          <img src="${blog.coverImage}" alt="${blog.title}" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop'">
+        </div>
+        <div class="blog-card-overlay"></div>
+        <div class="blog-card-content">
+          <div class="blog-card-glass">
+            <div class="blog-card-tag">${blog.tag}</div>
+            <h3 class="blog-card-title">${blog.title}</h3>
+            <p class="blog-card-excerpt">${blog.excerpt}</p>
+            <div class="blog-card-meta">
+              <span class="blog-card-date">${blog.date} · ${blog.readTime} min read</span>
+              <span class="blog-card-read">Read →</span>
+            </div>
+          </div>
+        </div>
+      </article>`).join('');
+
+    // Glow card mouse tracking
+    grid.querySelectorAll('.glow-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+      });
+    });
+  }
+
+  // Open blog reading page
+  window.openBlog = function(slug) {
+    window.location.href = `blog.html?slug=${slug}`;
+  };
+
+  // ─────────────────────────────────────────────────
   // INITIALIZE
   // ─────────────────────────────────────────────────
   renderProjects();
   renderTimeline();
+  renderBlog();
+
+  // Set resume link
+  const resumeBtn = document.getElementById('resumeIconBtn');
+  if (resumeBtn && typeof RESUME_LINK !== 'undefined') {
+    resumeBtn.href = RESUME_LINK;
+  }
 
   // Cleanup on window unload
   window.addEventListener('unload', () => {
