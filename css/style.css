@@ -1401,8 +1401,10 @@ img {
 }
 
 /* ═══════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — COMPREHENSIVE MOBILE-FIRST
    ═══════════════════════════════════════════════════ */
+
+/* ── Tablets & Small Desktops (≤1024px) ── */
 @media (max-width: 1024px) {
   .hero-section {
     flex-direction: column;
@@ -1411,17 +1413,12 @@ img {
   .hero-left {
     align-items: center;
     text-align: center;
-    padding: 6rem 2rem 2rem;
+    padding: 5rem 2rem 2rem;
   }
 
   .hero-content {
     text-align: center;
     align-items: center;
-  }
-
-  .hero-right {
-    min-height: 50vh;
-    flex: none;
   }
 
   .hero-description {
@@ -1441,36 +1438,111 @@ img {
     left: 50%;
     transform: translateX(-50%);
   }
+
+  .section-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
+/* ── Robot: hide on PORTRAIT screens ≤1024px ── */
+/* This means: on portrait phones & portrait tablets, robot is hidden.
+   On landscape tablets or larger, robot stays visible. */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .hero-right {
+    display: none !important;
+  }
+
+  .hero-section {
+    min-height: auto;
+  }
+
+  .hero-left {
+    padding-bottom: 4rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+/* ── Robot: show on landscape ≤1024px ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .hero-right {
+    display: block;
+    min-height: 50vh;
+    flex: none;
+  }
+}
+
+/* ── Mid-range screens (≤768px) ── */
 @media (max-width: 768px) {
   .hero-left {
-    padding: 5rem 1.5rem 1.5rem;
+    padding: 4.5rem 1.25rem 2rem;
   }
 
   .hero-name {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
     letter-spacing: -1px;
   }
 
+  .hero-subtitle {
+    font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+
+  /* Nav — compact pills */
   .floating-nav {
     gap: 0;
-    padding: 0.35rem;
+    padding: 0.3rem;
+    max-width: calc(100vw - 1rem);
+    border-radius: 1.5rem;
   }
 
   .nav-pill {
-    font-size: 0.75rem;
-    padding: 0.5rem 0.8rem;
-    min-height: 40px;
+    font-size: 0.72rem;
+    padding: 0.5rem 0.7rem;
+    min-height: 38px;
+    border-radius: 1rem;
   }
 
+  .nav-pill::before {
+    border-radius: 1rem;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .section-tag {
+    font-size: 0.65rem;
+    padding: 0.4rem 1rem;
+  }
+
+  /* Projects — single column */
   .projects-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
+  .project-card-img {
+    height: 180px;
+  }
+
+  /* View Project button — better touch target */
+  .btn-view-project {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    min-height: 44px;
+  }
+
+  /* Book — stacked + smaller */
   .book-showcase {
     flex-direction: column;
     text-align: center;
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
   .book-3d-wrapper {
@@ -1478,28 +1550,51 @@ img {
   }
 
   .book-3d {
-    width: 200px;
-    height: 283px;
+    width: 180px;
+    height: 255px;
   }
 
   .book-front, .book-back {
-    width: 200px;
-    height: 283px;
+    width: 180px;
+    height: 255px;
+  }
+
+  .book-title {
+    font-size: 1.8rem;
   }
 
   .book-highlights {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 
   .book-cta {
     margin: 0 auto;
   }
 
+  .book-description {
+    font-size: 0.9rem;
+  }
+
+  /* Contact */
   .contact-social-bar {
     flex-wrap: wrap;
     padding: 0.75rem;
+    gap: 0.5rem;
+    max-width: 100%;
+    justify-content: center;
   }
 
+  .contact-social-btn {
+    min-width: 60px;
+  }
+
+  .contact-email-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* Timeline */
   .timeline {
     padding-left: 1.5rem;
   }
@@ -1508,28 +1603,216 @@ img {
     padding-left: 2rem;
   }
 
+  /* Scroll indicator hidden */
   .scroll-indicator {
     display: none;
   }
-}
 
-@media (max-width: 480px) {
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
+  /* Curves — smaller */
+  .hero-curve,
+  .projects-curve-top {
+    height: 40px;
   }
 
-  .book-3d-wrapper {
-    transform: scale(0.85);
+  /* Marquee */
+  .marquee-wrapper::before,
+  .marquee-wrapper::after {
+    width: 60px;
+  }
+
+  .skill-chip {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  /* Footer */
+  .footer-links {
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+  }
+}
+
+/* ── Small phones (≤480px) ── */
+@media (max-width: 480px) {
+  .hero-left {
+    padding: 4rem 1rem 2rem;
+  }
+
+  .hero-name {
+    font-size: clamp(2.2rem, 14vw, 3rem);
+    letter-spacing: 0px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn-glow, .btn-outline {
+    justify-content: center;
+    width: 100%;
+    padding: 0.85rem 1.5rem;
   }
 
   .social-icons-bar {
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 280px;
+    margin: 0 auto;
   }
 
+  .social-icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Book extra small */
+  .book-3d-wrapper {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+
+  .book-info {
+    padding: 0 0.5rem;
+  }
+
+  .book-title {
+    font-size: 1.5rem;
+  }
+
+  .book-author {
+    font-size: 0.95rem;
+  }
+
+  .book-description {
+    font-size: 0.85rem;
+  }
+
+  /* Contact bar — vertical grid */
   .contact-social-bar {
-    gap: 0.25rem;
+    gap: 0.35rem;
+    padding: 0.6rem;
+  }
+
+  .contact-social-btn {
+    min-width: 55px;
+    padding: 0.5rem 0.4rem;
+  }
+
+  .social-label {
+    font-size: 0.55rem;
+  }
+
+  /* Floating nav ultra-compact */
+  .floating-nav {
+    padding: 0.25rem;
+    bottom: 0.75rem;
+  }
+
+  .nav-pill {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.55rem;
+    min-height: 34px;
+  }
+
+  /* Section padding */
+  .section-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Projects */
+  .project-card-body {
+    padding: 1rem;
+  }
+
+  .project-card-body h3 {
+    font-size: 1.1rem;
+  }
+
+  .project-card-body p {
+    font-size: 0.85rem;
+  }
+
+  /* Timeline */
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  .timeline-item {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-card {
+    padding: 1rem;
+  }
+
+  .timeline-card h3 {
+    font-size: 1rem;
+  }
+
+  /* Footer compact */
+  .footer-tagline {
+    font-size: 0.8rem;
+  }
+
+  .footer-copy {
+    font-size: 0.72rem;
+  }
+
+  .footer-legal {
+    font-size: 0.65rem;
+  }
+}
+
+/* ── Tiny phones (≤360px) ── */
+@media (max-width: 360px) {
+  .hero-name {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .nav-pill {
+    font-size: 0.6rem;
+    padding: 0.35rem 0.45rem;
+  }
+
+  .floating-nav {
+    border-radius: 1rem;
+  }
+
+  .book-3d-wrapper {
+    transform: scale(0.7);
+  }
+}
+
+/* ── Landscape phones (short height) ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-left {
+    padding-top: 2rem;
+    min-height: auto;
+  }
+
+  .hero-right {
+    min-height: 100vh;
+    max-width: 40%;
+  }
+
+  .hero-name {
+    font-size: 2.5rem;
+  }
+
+  .floating-nav {
+    bottom: 0.5rem;
   }
 }
 
