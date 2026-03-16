@@ -1,0 +1,517 @@
+/* ═══════════════════════════════════════════════════
+   KANISHK BHARDWAJ — MAIN APPLICATION JS
+   ═══════════════════════════════════════════════════ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Global Animations Context for cleanup
+  const ctx = gsap.context(() => {});
+
+  // ─────────────────────────────────────────────────
+  // 0. ACCESSIBILITY: REDUCED MOTION
+  // ─────────────────────────────────────────────────
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ─────────────────────────────────────────────────
+  // 1. SPLASH SCREEN
+  // ─────────────────────────────────────────────────
+  const splash = document.getElementById('splash-screen');
+  setTimeout(() => {
+    splash.classList.add('hidden');
+    if (!prefersReducedMotion) initHeroAnimations();
+    else {
+      gsap.set('.hero-badge, .hero-name, .hero-subtitle, .hero-description, .hero-actions, .social-icons-bar', {
+        opacity: 1, y: 0
+      });
+    }
+  }, 2200);
+
+  // ─────────────────────────────────────────────────
+  // 2. CUSTOM CURSOR
+  // ─────────────────────────────────────────────────
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let dotX = 0, dotY = 0;
+  let ringX = 0, ringY = 0;
+
+  if (!prefersReducedMotion) {
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      dotX += (mouseX - dotX) * 0.25;
+      dotY += (mouseY - dotY) * 0.25;
+      dot.style.left = dotX + 'px';
+      dot.style.top = dotY + 'px';
+
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover states
+    function attachCursorHover(elements) {
+      elements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          dot.classList.add('hovering');
+          ring.classList.add('hovering');
+        });
+        el.addEventListener('mouseleave', () => {
+          dot.classList.remove('hovering');
+          ring.classList.remove('hovering');
+        });
+      });
+    }
+
+    attachCursorHover(document.querySelectorAll(
+      'a, button, .project-card, .contact-social-btn, .skill-chip, .timeline-card, .social-icon-btn'
+    ));
+  } else {
+    if (dot) dot.style.display = 'none';
+    if (ring) ring.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+
+  // ─────────────────────────────────────────────────
+  // 3. FLOATING NAVIGATION
+  // ─────────────────────────────────────────────────
+  const nav = document.getElementById('floatingNav');
+  const navPills = document.querySelectorAll('.nav-pill');
+  const sections = document.querySelectorAll('section[id]');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight * 0.5) {
+      nav.classList.add('visible');
+    } else {
+      nav.classList.remove('visible');
+    }
+
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 200;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navPills.forEach(pill => {
+      pill.classList.remove('active');
+      if (pill.getAttribute('data-section') === current) {
+        pill.classList.add('active');
+      }
+    });
+  });
+
+  navPills.forEach(pill => {
+    pill.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById(pill.getAttribute('data-section'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ─────────────────────────────────────────────────
+  // 4. HERO ANIMATIONS (via GSAP)
+  // ─────────────────────────────────────────────────
+  function initHeroAnimations() {
+    ctx.add(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.to('.hero-badge', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: 0.2
+      })
+      .to('.hero-name', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+      }, '-=0.4')
+      .to('.hero-subtitle', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      }, '-=0.5')
+      .to('.hero-description', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      }, '-=0.4')
+      .to('.hero-actions', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      }, '-=0.3')
+      .to('.social-icons-bar', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      }, '-=0.4');
+    });
+  }
+
+  // ─────────────────────────────────────────────────
+  // 5. SCROLL-TRIGGERED ANIMATIONS
+  // ─────────────────────────────────────────────────
+  if (!prefersReducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    ctx.add(() => {
+      // Section headers
+      gsap.utils.toArray('.section-header').forEach(header => {
+        gsap.from(header.children, {
+          scrollTrigger: {
+            trigger: header,
+            start: 'top 85%',
+          },
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out'
+        });
+      });
+
+      // Project cards
+      ScrollTrigger.batch('.project-card', {
+        onEnter: batch => {
+          gsap.from(batch, {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out'
+          });
+        },
+        start: 'top 85%',
+        once: true
+      });
+
+      // Timeline items
+      ScrollTrigger.batch('.timeline-item', {
+        onEnter: batch => {
+          gsap.from(batch, {
+            opacity: 0,
+            x: -30,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out'
+          });
+        },
+        start: 'top 85%',
+        once: true
+      });
+
+      // Book section
+      gsap.from('.book-3d-wrapper', {
+        scrollTrigger: {
+          trigger: '.book-showcase',
+          start: 'top 80%',
+        },
+        opacity: 0,
+        x: -60,
+        duration: 1.2,
+        ease: 'power3.out'
+      });
+
+      gsap.from('.book-info', {
+        scrollTrigger: {
+          trigger: '.book-showcase',
+          start: 'top 80%',
+        },
+        opacity: 0,
+        x: 60,
+        duration: 1.2,
+        delay: 0.2,
+        ease: 'power3.out'
+      });
+
+      // Contact social bar
+      gsap.from('.contact-social-bar', {
+        scrollTrigger: {
+          trigger: '.contact-section',
+          start: 'top 80%',
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────
+  // 6. RENDER PROJECTS (with styled View Project button)
+  // ─────────────────────────────────────────────────
+  function renderProjects() {
+    const projects = window.getProjects();
+    const grid = document.getElementById('projectsGrid');
+
+    if (!projects || projects.length === 0) {
+      grid.innerHTML = `
+        <div style="text-align:center; color: var(--text-muted); grid-column: 1/-1; padding: 4rem 0;">
+          <p style="font-size: 1.1rem; max-width: none;">No projects found.</p>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; max-width: none;">Add some via the Admin panel!</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = projects.map(p => {
+      const tags = p.tags.split(',').map(t =>
+        `<span class="tag">${t.trim()}</span>`
+      ).join('');
+
+      return `
+        <article class="project-card">
+          <div class="project-card-image-wrapper">
+            <img src="${p.img}" alt="${p.title}" class="project-card-image" loading="lazy"
+                 onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop'">
+          </div>
+          <div class="project-card-body">
+            <h3>${p.title}</h3>
+            <p>${p.description}</p>
+            <div class="project-tags">${tags}</div>
+            <a href="${p.link}" target="_blank" class="btn-view-project" aria-label="View ${p.title} project">
+              <span>View Project</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </a>
+          </div>
+        </article>`;
+    }).join('');
+
+    // Re-attach cursor hover
+    if (!prefersReducedMotion) {
+      attachCursorHover(document.querySelectorAll('.project-card, .btn-view-project'));
+    }
+  }
+
+  // Helper function available in scope
+  function attachCursorHover(elements) {
+    if (!dot || !ring) return;
+    elements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        dot.classList.add('hovering');
+        ring.classList.add('hovering');
+      });
+      el.addEventListener('mouseleave', () => {
+        dot.classList.remove('hovering');
+        ring.classList.remove('hovering');
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────
+  // 7. RENDER TIMELINE
+  // ─────────────────────────────────────────────────
+  function renderTimeline() {
+    const timelineData = window.getTimeline();
+    const container = document.getElementById('timeline');
+
+    if (!timelineData || timelineData.length === 0) {
+      container.innerHTML = `
+        <p style="color: var(--text-muted); text-align: center; padding: 2rem; max-width: none;">
+          Timeline entries will appear here.
+        </p>`;
+      return;
+    }
+
+    container.innerHTML = timelineData.map(item => {
+      const badgeClass = {
+        education: 'badge-education',
+        work: 'badge-work',
+        research: 'badge-research',
+        achievement: 'badge-achievement'
+      }[item.type] || 'badge-education';
+
+      const typeLabel = {
+        education: '🎓 Education',
+        work: '💼 Experience',
+        research: '🔬 Research',
+        achievement: '🏆 Achievement'
+      }[item.type] || item.type;
+
+      return `
+        <div class="timeline-item">
+          <span class="timeline-date">${item.date}</span>
+          <div class="timeline-card">
+            <span class="timeline-type-badge ${badgeClass}">${typeLabel}</span>
+            <h3>${item.title}</h3>
+            <p class="timeline-place">${item.place}</p>
+            <p>${item.description}</p>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Re-attach cursor hover
+    if (!prefersReducedMotion) {
+      attachCursorHover(document.querySelectorAll('.timeline-card'));
+    }
+  }
+
+  // ─────────────────────────────────────────────────
+  // 8. MAGNETIC EFFECT
+  // ─────────────────────────────────────────────────
+  if (!prefersReducedMotion) {
+    const magneticEls = document.querySelectorAll('.btn-glow, .btn-outline, .nav-pill');
+    magneticEls.forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(el, {
+          x: x * 0.2,
+          y: y * 0.2,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+      el.addEventListener('mouseleave', () => {
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.3)'
+        });
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────
+  // 9. SMOOTH PARALLAX ON SPLINE (rAF-based)
+  // ─────────────────────────────────────────────────
+  const splineContainer = document.getElementById('splineContainer');
+  if (splineContainer && !prefersReducedMotion) {
+    let ticking = false;
+    let currentTranslateY = 0;
+    let targetTranslateY = 0;
+    let currentOpacity = 1;
+    let targetOpacity = 1;
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const heroHeight = window.innerHeight;
+      if (scrolled < heroHeight) {
+        const progress = scrolled / heroHeight;
+        targetTranslateY = scrolled * 0.2;
+        targetOpacity = 1 - progress * 0.6;
+      }
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    });
+
+    function updateParallax() {
+      // Smooth lerp
+      currentTranslateY += (targetTranslateY - currentTranslateY) * 0.08;
+      currentOpacity += (targetOpacity - currentOpacity) * 0.08;
+      splineContainer.style.transform = `translateY(${currentTranslateY}px)`;
+      splineContainer.style.opacity = currentOpacity;
+
+      if (Math.abs(targetTranslateY - currentTranslateY) > 0.1 ||
+          Math.abs(targetOpacity - currentOpacity) > 0.001) {
+        requestAnimationFrame(updateParallax);
+      } else {
+        ticking = false;
+      }
+    }
+  }
+
+  // ─────────────────────────────────────────────────
+  // 10. SCROLL INDICATOR — HIDE AFTER SMALL SCROLL
+  // ─────────────────────────────────────────────────
+  const scrollIndicator = document.getElementById('scrollIndicator');
+  if (scrollIndicator) {
+    let indicatorHidden = false;
+    window.addEventListener('scroll', () => {
+      if (!indicatorHidden && window.scrollY > 30) {
+        indicatorHidden = true;
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.transform = 'translateY(20px)';
+        // Remove from DOM after transition
+        setTimeout(() => {
+          scrollIndicator.style.display = 'none';
+        }, 400);
+      }
+    }, { passive: true });
+  }
+
+  // ─────────────────────────────────────────────────
+  // 11. BOOK 3D — FULL 360° DRAG ROTATION
+  // ─────────────────────────────────────────────────
+  const book3d = document.getElementById('book3d');
+  if (book3d && !prefersReducedMotion) {
+    let isDragging = false;
+    let startX = 0;
+    let baseRotation = -35;
+    let dragRotation = 0;
+
+    function startDrag(clientX) {
+      isDragging = true;
+      startX = clientX;
+      // Capture the current computed rotation
+      const computed = getComputedStyle(book3d).transform;
+      if (computed && computed !== 'none') {
+        const matrix = new DOMMatrix(computed);
+        baseRotation = Math.round(Math.atan2(matrix.m13, matrix.m33) * (180 / Math.PI));
+      }
+      book3d.style.animation = 'none';
+      book3d.style.transition = 'none';
+      book3d.style.cursor = 'grabbing';
+    }
+
+    function moveDrag(clientX) {
+      if (!isDragging) return;
+      const deltaX = clientX - startX;
+      // Full 360° — multiply by 0.8 for responsive feel
+      dragRotation = baseRotation + deltaX * 0.8;
+      book3d.style.transform = `rotateY(${dragRotation}deg) rotateX(2deg)`;
+    }
+
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      book3d.style.cursor = 'grab';
+      // Smooth ease back to animation
+      book3d.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(() => {
+        book3d.style.transition = '';
+        book3d.style.animation = '';
+      }, 1200);
+    }
+
+    // Mouse events
+    book3d.addEventListener('mousedown', (e) => { e.preventDefault(); startDrag(e.clientX); });
+    document.addEventListener('mousemove', (e) => moveDrag(e.clientX));
+    document.addEventListener('mouseup', endDrag);
+
+    // Touch events
+    book3d.addEventListener('touchstart', (e) => { startDrag(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('touchmove', (e) => { if (isDragging) moveDrag(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('touchend', endDrag);
+  }
+
+  // ─────────────────────────────────────────────────
+  // INITIALIZE
+  // ─────────────────────────────────────────────────
+  renderProjects();
+  renderTimeline();
+
+  // Cleanup on window unload
+  window.addEventListener('unload', () => {
+    ctx.revert();
+  });
+
+});

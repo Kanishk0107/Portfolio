@@ -1,0 +1,6 @@
+.agent/
+.gemini/
+.vscode/
+node_modules/
+.DS_Store
+Thumbs.db
