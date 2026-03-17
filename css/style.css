@@ -280,6 +280,9 @@ img {
   position: relative;
   min-height: 100vh;
   will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .hero-right spline-viewer {
@@ -1402,6 +1405,31 @@ img {
 }
 
 /* ═══════════════════════════════════════════════════
+   SPOTLIGHT EFFECT — CURSOR TRACKING
+   ═══════════════════════════════════════════════════ */
+.spotlight-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.spotlight {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 40%, transparent 70%);
+  filter: blur(40px);
+  will-change: transform;
+  transform: translateZ(0);
+  pointer-events: none;
+  top: -250px;
+  left: -250px;
+}
+
+/* ═══════════════════════════════════════════════════
    RESPONSIVE — COMPREHENSIVE MOBILE-FIRST
    ═══════════════════════════════════════════════════ */
 
@@ -1486,6 +1514,15 @@ img {
     display: block;
     min-height: 50vh;
     flex: none;
+  }
+}
+
+/* ── Robot: VISIBLE on desktop (>1024px) ── */
+@media (min-width: 1025px) {
+  .hero-right {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -2218,4 +2255,83 @@ spline-viewer::part(logo) {
 .book-section .section-header {
   position: relative;
   z-index: 1;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   144Hz PERFORMANCE OPTIMIZATION
+   ═══════════════════════════════════════════════════ */
+
+/* Enable GPU acceleration for all animated elements */
+* {
+  -webkit-font-smoothing: antialiased;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: no-preference) {
+  /* Use transform and opacity only */
+  .hero-badge,
+  .hero-name,
+  .hero-subtitle,
+  .hero-description,
+  .hero-actions,
+  .social-icons-bar,
+  .scroll-indicator,
+  .project-card,
+  .timeline-item,
+  .blog-card,
+  .book-3d,
+  .nav-pill,
+  .btn-glow,
+  .btn-outline,
+  .skill-chip,
+  .contact-social-btn {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+
+  /* Smooth transitions */
+  .hero-badge,
+  .hero-name,
+  .hero-subtitle,
+  .hero-description,
+  .hero-actions,
+  .social-icons-bar,
+  .project-card,
+  .timeline-card,
+  .blog-card,
+  .glow-card,
+  .nav-pill,
+  .btn-glow,
+  .btn-outline,
+  .skill-chip,
+  .contact-social-btn {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  /* Marquee optimization */
+  .marquee-track {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Spline viewer optimization */
+  spline-viewer {
+    will-change: transform, opacity;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

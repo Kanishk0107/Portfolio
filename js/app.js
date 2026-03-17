@@ -13,13 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ─────────────────────────────────────────────────
-  // 1. SPLASH SCREEN
+  // 1. SPLASH SCREEN — OPTIMIZED TIMING
   // ─────────────────────────────────────────────────
   const splash = document.getElementById('splash-screen');
-  setTimeout(() => {
-    splash.classList.add('hidden');
-    if (!prefersReducedMotion) initHeroAnimations();
-    else {
+  const splineContainer = document.getElementById('splineContainer');
+  
+  // Ensure spline viewer starts loading immediately
+  if (splineContainer) {
+    splineContainer.style.willChange = 'transform, opacity';
+  }
+
+  // Hide splash after animation completes
+  const splashTimer = setTimeout(() => {
+    if (splash) {
+      splash.classList.add('hidden');
+    }
+    if (!prefersReducedMotion) {
+      initHeroAnimations();
+    } else {
       gsap.set('.hero-badge, .hero-name, .hero-subtitle, .hero-description, .hero-actions, .social-icons-bar', {
         opacity: 1, y: 0
       });
@@ -78,48 +89,53 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────
-  // 4. HERO ANIMATIONS (via GSAP)
+  // 4. HERO ANIMATIONS (via GSAP) — 144Hz OPTIMIZED
   // ─────────────────────────────────────────────────
   function initHeroAnimations() {
     ctx.add(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const tl = gsap.timeline({
+        defaults: {
+          ease: 'power3.out',
+          duration: 0.8
+        }
+      });
 
       tl.to('.hero-badge', {
         opacity: 1,
         y: 0,
         duration: 0.8,
         delay: 0.2
-      })
+      }, 0)
       .to('.hero-name', {
         opacity: 1,
         y: 0,
-        duration: 1,
-      }, '-=0.4')
+        duration: 1
+      }, 0.4)
       .to('.hero-subtitle', {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-      }, '-=0.5')
+        duration: 0.8
+      }, 0.5)
       .to('.hero-description', {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-      }, '-=0.4')
+        duration: 0.8
+      }, 0.6)
       .to('.hero-actions', {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-      }, '-=0.3')
+        duration: 0.8
+      }, 0.7)
       .to('.social-icons-bar', {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-      }, '-=0.4');
+        duration: 0.8
+      }, 0.8);
     });
   }
 
   // ─────────────────────────────────────────────────
-  // 5. SCROLL-TRIGGERED ANIMATIONS
+  // 5. SCROLL-TRIGGERED ANIMATIONS — 144Hz OPTIMIZED
   // ─────────────────────────────────────────────────
   if (!prefersReducedMotion) {
     gsap.registerPlugin(ScrollTrigger);
@@ -131,11 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
           scrollTrigger: {
             trigger: header,
             start: 'top 85%',
+            once: true
           },
           opacity: 0,
           y: 40,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 0.6,
+          stagger: 0.1,
           ease: 'power3.out'
         });
       });
@@ -146,8 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
           gsap.from(batch, {
             opacity: 0,
             y: 50,
-            duration: 0.8,
-            stagger: 0.15,
+            duration: 0.6,
+            stagger: 0.1,
             ease: 'power3.out'
           });
         },
@@ -161,8 +178,23 @@ document.addEventListener('DOMContentLoaded', () => {
           gsap.from(batch, {
             opacity: 0,
             x: -30,
-            duration: 0.8,
-            stagger: 0.2,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: 'power3.out'
+          });
+        },
+        start: 'top 85%',
+        once: true
+      });
+
+      // Blog cards
+      ScrollTrigger.batch('.blog-card', {
+        onEnter: batch => {
+          gsap.from(batch, {
+            opacity: 0,
+            y: 50,
+            duration: 0.6,
+            stagger: 0.1,
             ease: 'power3.out'
           });
         },
@@ -175,10 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: {
           trigger: '.book-showcase',
           start: 'top 80%',
+          once: true
         },
         opacity: 0,
         x: -60,
-        duration: 1.2,
+        duration: 0.8,
         ease: 'power3.out'
       });
 
@@ -186,11 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: {
           trigger: '.book-showcase',
           start: 'top 80%',
+          once: true
         },
         opacity: 0,
         x: 60,
-        duration: 1.2,
-        delay: 0.2,
+        duration: 0.8,
+        delay: 0.15,
         ease: 'power3.out'
       });
 
@@ -199,26 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: {
           trigger: '.contact-section',
           start: 'top 80%',
+          once: true
         },
         opacity: 0,
         y: 30,
-        duration: 0.8,
+        duration: 0.6,
         ease: 'power3.out'
-      });
-
-      // Blog cards
-      ScrollTrigger.batch('.blog-card', {
-        onEnter: batch => {
-          gsap.from(batch, {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'power3.out'
-          });
-        },
-        start: 'top 85%',
-        once: true
       });
     });
   }
@@ -326,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─────────────────────────────────────────────────
-  // 8. MAGNETIC EFFECT
+  // 8. MAGNETIC EFFECT — 144Hz OPTIMIZED
   // ─────────────────────────────────────────────────
   if (!prefersReducedMotion) {
     const magneticEls = document.querySelectorAll('.btn-glow, .btn-outline, .nav-pill');
@@ -336,27 +356,92 @@ document.addEventListener('DOMContentLoaded', () => {
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
         gsap.to(el, {
-          x: x * 0.2,
-          y: y * 0.2,
-          duration: 0.3,
-          ease: 'power2.out'
+          x: x * 0.15,
+          y: y * 0.15,
+          duration: 0.2,
+          ease: 'power2.out',
+          overwrite: 'auto'
         });
       });
       el.addEventListener('mouseleave', () => {
         gsap.to(el, {
           x: 0,
           y: 0,
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.3)'
+          duration: 0.4,
+          ease: 'elastic.out(1, 0.3)',
+          overwrite: 'auto'
         });
       });
     });
   }
 
   // ─────────────────────────────────────────────────
-  // 9. SMOOTH PARALLAX ON SPLINE (rAF-based)
+  // 9. SPOTLIGHT CURSOR TRACKING — 144Hz OPTIMIZED
   // ─────────────────────────────────────────────────
-  const splineContainer = document.getElementById('splineContainer');
+  const heroSection = document.querySelector('.hero-section');
+  const spotlight = document.getElementById('spotlight');
+  
+  if (heroSection && spotlight && !prefersReducedMotion) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let spotlightX = 0;
+    let spotlightY = 0;
+    let isInHero = false;
+    let ticking = false;
+
+    // Track mouse position within hero section
+    heroSection.addEventListener('mousemove', (e) => {
+      isInHero = true;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      if (!ticking) {
+        requestAnimationFrame(updateSpotlight);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Hide spotlight when leaving hero section
+    heroSection.addEventListener('mouseleave', () => {
+      isInHero = false;
+      spotlight.style.opacity = '0';
+    });
+
+    // Show spotlight when entering hero section
+    heroSection.addEventListener('mouseenter', () => {
+      isInHero = true;
+      spotlight.style.opacity = '1';
+    });
+
+    function updateSpotlight() {
+      if (!isInHero) {
+        ticking = false;
+        return;
+      }
+
+      // Smooth lerp for 144Hz smooth tracking
+      spotlightX += (mouseX - spotlightX) * 0.15;
+      spotlightY += (mouseY - spotlightY) * 0.15;
+
+      // Position spotlight at cursor (offset by half size for center)
+      spotlight.style.transform = `translate(${spotlightX - 250}px, ${spotlightY - 250}px)`;
+
+      // Continue animation if still moving
+      if (Math.abs(mouseX - spotlightX) > 1 || Math.abs(mouseY - spotlightY) > 1) {
+        requestAnimationFrame(updateSpotlight);
+      } else {
+        ticking = false;
+      }
+    }
+
+    // Initial state
+    spotlight.style.opacity = '0';
+    spotlight.style.transition = 'opacity 0.3s ease';
+  }
+
+  // ─────────────────────────────────────────────────
+  // 10. SMOOTH PARALLAX ON SPLINE — 144Hz OPTIMIZED
+  // ─────────────────────────────────────────────────
   if (splineContainer && !prefersReducedMotion) {
     let ticking = false;
     let currentTranslateY = 0;
@@ -369,24 +454,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const heroHeight = window.innerHeight;
       if (scrolled < heroHeight) {
         const progress = scrolled / heroHeight;
-        targetTranslateY = scrolled * 0.2;
-        targetOpacity = 1 - progress * 0.6;
+        targetTranslateY = scrolled * 0.15;
+        targetOpacity = 1 - progress * 0.5;
       }
       if (!ticking) {
         requestAnimationFrame(updateParallax);
         ticking = true;
       }
-    });
+    }, { passive: true });
 
     function updateParallax() {
-      // Smooth lerp
-      currentTranslateY += (targetTranslateY - currentTranslateY) * 0.08;
-      currentOpacity += (targetOpacity - currentOpacity) * 0.08;
+      // Smooth lerp with reduced iterations
+      currentTranslateY += (targetTranslateY - currentTranslateY) * 0.12;
+      currentOpacity += (targetOpacity - currentOpacity) * 0.12;
+      
       splineContainer.style.transform = `translateY(${currentTranslateY}px)`;
       splineContainer.style.opacity = currentOpacity;
 
-      if (Math.abs(targetTranslateY - currentTranslateY) > 0.1 ||
-          Math.abs(targetOpacity - currentOpacity) > 0.001) {
+      if (Math.abs(targetTranslateY - currentTranslateY) > 0.5 ||
+          Math.abs(targetOpacity - currentOpacity) > 0.01) {
         requestAnimationFrame(updateParallax);
       } else {
         ticking = false;
@@ -414,7 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─────────────────────────────────────────────────
-  // 11. BOOK 3D — FULL 360° DRAG ROTATION
+  // 11. BOOK 3D — FULL 360° DRAG ROTATION — 144Hz OPTIMIZED
   // ─────────────────────────────────────────────────
   const book3d = document.getElementById('book3d');
   if (book3d && !prefersReducedMotion) {
@@ -422,11 +508,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let baseRotation = -35;
     let dragRotation = 0;
+    let animationFrameId = null;
 
     function startDrag(clientX) {
       isDragging = true;
       startX = clientX;
-      // Capture the current computed rotation
       const computed = getComputedStyle(book3d).transform;
       if (computed && computed !== 'none') {
         const matrix = new DOMMatrix(computed);
@@ -440,8 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveDrag(clientX) {
       if (!isDragging) return;
       const deltaX = clientX - startX;
-      // Full 360° — multiply by 0.8 for responsive feel
-      dragRotation = baseRotation + deltaX * 0.8;
+      dragRotation = baseRotation + deltaX * 0.6;
       book3d.style.transform = `rotateY(${dragRotation}deg) rotateX(2deg)`;
     }
 
@@ -449,12 +534,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isDragging) return;
       isDragging = false;
       book3d.style.cursor = 'grab';
-      // Smooth ease back to animation
-      book3d.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      book3d.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
       setTimeout(() => {
         book3d.style.transition = '';
         book3d.style.animation = '';
-      }, 1200);
+      }, 800);
     }
 
     // Mouse events
@@ -536,6 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cleanup on window unload
   window.addEventListener('unload', () => {
+    clearTimeout(splashTimer);
     ctx.revert();
   });
 
