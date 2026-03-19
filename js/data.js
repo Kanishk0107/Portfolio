@@ -37,48 +37,94 @@ const defaultData = {
       tags: 'Travel, UI/UX, Next.js'
     }
   ],
-  timeline: [
+  timeline: []
+};
+
+// ─── Journey Data (Most Recent First) ───
+window.getTimeline = function () {
+  return [
     {
       id: 't1',
-      type: 'education',
-      date: '2024 — Present',
-      title: 'M.Tech in Computer Science',
-      place: 'Pursuing Advanced Studies',
-      description: 'Specializing in Artificial Intelligence and Machine Learning, with research focus on intelligent systems.'
+      type: 'achievement',
+      date: 'March 2026',
+      title: 'Book Publication',
+      place: 'Amazon Kindle',
+      description: '"Vibe To Code" published on Amazon Kindle — A comprehensive guide to creative coding and modern web development.',
+      isLive: true
     },
     {
       id: 't2',
-      type: 'achievement',
-      date: '2024',
-      title: 'Published "Vibe To Code"',
-      place: 'Amazon Kindle',
-      description: 'Authored and published a comprehensive guide on creative coding and modern web development.'
+      type: 'education',
+      date: 'July 2025 - Present',
+      title: 'MTech in CSE',
+      place: 'Gurukula Kangri University, Haridwar',
+      description: 'Pursuing advanced studies in Computer Science and Engineering with focus on AI and emerging technologies.',
+      isLive: true
     },
     {
       id: 't3',
-      type: 'work',
-      date: '2023 — 2024',
-      title: 'AI Developer & Researcher',
-      place: 'Freelance & Projects',
-      description: 'Built AI-powered applications, contributed to open-source projects, and developed production-ready web solutions.'
+      type: 'research',
+      date: 'March 2025',
+      title: 'Research Publication',
+      place: 'International Conference',
+      description: '"Rooted Growth: Crop Recommendation through Soil Understanding" — Abstract accepted at International Conference on Automation for Sustainable Future.',
+      isLive: false
     },
     {
       id: 't4',
-      type: 'education',
-      date: '2020 — 2023',
-      title: "Bachelor's in Computer Science",
-      place: 'University',
-      description: 'Strong foundation in computer science fundamentals, data structures, algorithms, and software engineering.'
+      type: 'achievement',
+      date: '2024',
+      title: 'Professional Certifications',
+      place: 'IBM & Coursera',
+      description: '8 Certifications in Machine Learning, Data Science, Power BI, and Tableau from industry leaders.',
+      isLive: false
     },
     {
       id: 't5',
-      type: 'research',
-      date: '2023',
-      title: 'Research in Machine Learning',
-      place: 'Academic Research',
-      description: 'Conducted research on machine learning applications in agriculture and real-world problem solving.'
+      type: 'work',
+      date: 'Aug 2024 - Feb 2025',
+      title: 'Machine Learning Internship',
+      place: 'NIELIT, Haridwar (Ministry of IT)',
+      description: 'Completed 120-hour intensive program. Developed Smart Crop Advisor System with 99.5% accuracy using Flask deployment.',
+      isLive: false
+    },
+    {
+      id: 't6',
+      type: 'achievement',
+      date: '2023 - 2024',
+      title: 'Data Analytics Projects',
+      place: 'Portfolio Projects',
+      description: 'Global Data Center Analysis (92% accuracy) • Diwali Sales Analysis (11,239 transactions) • Store Data Analysis (89% accuracy with Power BI)',
+      isLive: false
+    },
+    {
+      id: 't7',
+      type: 'work',
+      date: 'May 2023 - July 2023',
+      title: 'Fullstack Development Internship',
+      place: 'WhizzyStack Solution (Remote)',
+      description: 'Developed full-stack web applications using modern technologies and best practices.',
+      isLive: false
+    },
+    {
+      id: 't8',
+      type: 'education',
+      date: 'July 2022 - April 2025',
+      title: 'BTech in CSE',
+      place: 'Gurukula Kangri University, Haridwar',
+      description: 'Bachelor of Technology in Computer Science and Engineering with CGPA: 7.2',
+      isLive: false
+    },
+    {
+      id: 't9',
+      type: 'education',
+      date: '2019 - 2022',
+      title: 'Diploma in CSE',
+      place: 'SDIMT, Haridwar',
+      description: 'Diploma in Computer Science and Engineering with CGPA: 8.0',
+      isLive: false
     }
-  ]
+  ];
 };
 
 // ─── Data Access Functions ───
@@ -96,11 +142,15 @@ window.savePortfolioData = function (data) {
 };
 
 window.getProjects = function () {
-  return window.getPortfolioData().projects;
-};
-
-window.getTimeline = function () {
-  return window.getPortfolioData().timeline || defaultData.timeline;
+  const data = window.getPortfolioData();
+  // Ensure all projects have links
+  if (data.projects && data.projects.length > 0) {
+    data.projects = data.projects.map(p => ({
+      ...p,
+      link: p.link || defaultData.projects.find(dp => dp.id === p.id)?.link || '#'
+    }));
+  }
+  return data.projects;
 };
 
 window.addProject = function (project) {
@@ -130,13 +180,14 @@ window.resetToDefaults = function () {
   return defaultData;
 };
 
-// Auto-reset if CRM project still exists in stored data
+// Auto-reset if CRM project exists or projects missing links
 (function autoMigrate() {
   const data = localStorage.getItem(STORE_KEY);
   if (data) {
     const parsed = JSON.parse(data);
     const hasCRM = parsed.projects.some(p => p.id === 'p3' && p.title === 'CRM System');
-    if (hasCRM) {
+    const missingLinks = parsed.projects.some(p => !p.link);
+    if (hasCRM || missingLinks) {
       window.resetToDefaults();
     }
   }

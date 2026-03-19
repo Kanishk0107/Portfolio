@@ -45,9 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (dot) dot.style.display = 'none';
   if (ring) ring.style.display = 'none';
 
-  // Stub so cursor hover attachment calls don't break
-  function attachCursorHover() {}
-
   // ─────────────────────────────────────────────────
   // 3. FLOATING NAVIGATION
   // ─────────────────────────────────────────────────
@@ -259,10 +256,16 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Debug: Log projects to verify links
+    console.log('Projects loaded:', projects);
+
     grid.innerHTML = projects.map(p => {
       const tags = p.tags.split(',').map(t =>
         `<span class="tag">${t.trim()}</span>`
       ).join('');
+
+      // Ensure link exists, fallback to # if missing
+      const projectLink = p.link && p.link.trim() ? p.link : '#';
 
       return `
         <article class="project-card">
@@ -274,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3>${p.title}</h3>
             <p>${p.description}</p>
             <div class="project-tags">${tags}</div>
-            <a href="${p.link}" target="_blank" class="btn-view-project" aria-label="View ${p.title} project">
+            <a href="${projectLink}" target="_blank" rel="noopener noreferrer" class="btn-view-project" aria-label="View ${p.title} project">
               <span>View Project</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
@@ -283,13 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </article>`;
     }).join('');
-
-    // Re-attach cursor hover (no-op now)
-    attachCursorHoverNoop();
   }
 
-  // Helper function available in scope
-  function attachCursorHoverNoop() {}
+
 
   // ─────────────────────────────────────────────────
   // 7. RENDER TIMELINE
@@ -508,7 +507,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let baseRotation = -35;
     let dragRotation = 0;
-    let animationFrameId = null;
 
     function startDrag(clientX) {
       isDragging = true;
