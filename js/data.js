@@ -5,7 +5,7 @@
 const STORE_KEY = 'kanishk_portfolio_data';
 
 // ─── Resume Link (easy to edit) ───
-const RESUME_LINK = 'https://drive.google.com/file/d/1U9wUCEM7hIGQuXnX2yaIxgavmTUqFd34/view';
+const RESUME_LINK = 'https://drive.google.com/file/d/1e36IwSJzZh5Oom8jdPfkz5hrWidEVeBu/view';
 
 const defaultData = {
   projects: [
