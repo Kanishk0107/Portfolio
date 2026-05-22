@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ═══════════════════════════════════════════
+       KANISHK BHARDWAJ — XML SITEMAP
+       Domain: https://kanishkbhardwaj.com
+       Last Updated: 2026-05-22
+       ═══════════════════════════════════════════ -->
+
+  <!-- ─── Homepage (Priority 1.0) ─── -->
+  <url>
+    <loc>https://kanishkbhardwaj.com/</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kanishkbhardwaj.com/asset/Book%20Front.jpg</image:loc>
+      <image:title>Kanishk Bhardwaj — AI Developer, Researcher &amp; Vibe Coder Portfolio</image:title>
+      <image:caption>Portfolio of Kanishk Bhardwaj — AI Developer, Researcher, and author of Vibe To Code</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kanishkbhardwaj.com/asset/CRM.png</image:loc>
+      <image:title>Crop Recommendation System — ML Project by Kanishk Bhardwaj</image:title>
+      <image:caption>AI-based crop recommendation system using machine learning — built by Kanishk Bhardwaj</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kanishkbhardwaj.com/asset/cheque.png</image:loc>
+      <image:title>Cheque.io — Fintech Web App by Kanishk Bhardwaj</image:title>
+      <image:caption>Modern cheque management platform with real-time digital verification</image:caption>
+    </image:image>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://kanishkbhardwaj.com/about.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ─── Blog Posts (Priority 0.8) ─── -->
+  <url>
+    <loc>https://kanishkbhardwaj.com/blog.html?slug=vibe-coding-mindset</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kanishkbhardwaj.com/blog.html?slug=ai-in-agriculture</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kanishkbhardwaj.com/blog.html?slug=building-interactive-web</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

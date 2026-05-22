@@ -3,7 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — Kanishk Bhardwaj</title>
+
+  <!-- ═══ DYNAMIC SEO META — injected per blog post via JS ═══ -->
+  <title id="pageTitle">Blog — Kanishk Bhardwaj</title>
+  <meta name="description" id="metaDesc" content="Thoughts on AI, development, and the craft of building things — by Kanishk Bhardwaj.">
+  <meta name="author" content="Kanishk Bhardwaj">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+  <!-- Canonical — set dynamically per slug -->
+  <link rel="canonical" id="canonicalTag" href="https://kanishkbhardwaj.com/blog.html">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Open Graph — set dynamically -->
+  <meta property="og:type" content="article" id="ogType">
+  <meta property="og:url" id="ogUrl" content="https://kanishkbhardwaj.com/blog.html">
+  <meta property="og:title" id="ogTitle" content="Blog — Kanishk Bhardwaj">
+  <meta property="og:description" id="ogDesc" content="Thoughts on AI, development, and the craft of building things.">
+  <meta property="og:image" id="ogImage" content="https://kanishkbhardwaj.com/asset/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Kanishk Bhardwaj Portfolio">
+  <meta property="article:author" content="Kanishk Bhardwaj">
+  <meta property="article:published_time" id="ogPublished" content="">
+
+  <!-- Twitter Card — set dynamically -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@kanishk_0107">
+  <meta name="twitter:site" content="@kanishk_0107">
+  <meta name="twitter:title" id="twTitle" content="Blog — Kanishk Bhardwaj">
+  <meta name="twitter:description" id="twDesc" content="Thoughts on AI, development, and the craft of building things.">
+  <meta name="twitter:image" id="twImage" content="https://kanishkbhardwaj.com/asset/og-cover.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -73,14 +104,20 @@
 
   <script src="js/data.js"></script>
   <script>
-    // ── Get slug from URL ──
+    // ─── Get slug from URL ───
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
     const blogs = window.getBlogs ? window.getBlogs() : [];
     const blog = blogs.find(b => b.slug === slug);
 
+    // ─── Helper: set meta tag content by ID or name/property ───
+    function setMeta(selector, attr, value) {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, value);
+    }
+
     if (blog) {
-      document.title = blog.title + ' — Kanishk Bhardwaj';
+      // ── Page Content ──
       document.getElementById('heroImg').src = blog.coverImage;
       document.getElementById('heroImg').alt = blog.title;
       document.getElementById('articleTitle').textContent = blog.title;
@@ -89,13 +126,76 @@
       document.getElementById('articleByline').innerHTML =
         `<span>${blog.date}</span><span class="byline-dot">·</span><span>${blog.readTime} min read</span><span class="byline-dot">·</span><span>Kanishk Bhardwaj</span>`;
       document.getElementById('articleBody').innerHTML = blog.content;
+
+      // ── Dynamic SEO Meta Injection ──
+      const fullUrl = `https://kanishkbhardwaj.com/blog.html?slug=${blog.slug}`;
+      const pageTitle = `${blog.title} — Kanishk Bhardwaj`;
+      const coverImg = blog.coverImage.startsWith('http')
+        ? blog.coverImage
+        : `https://kanishkbhardwaj.com/${blog.coverImage}`;
+
+      // Title
+      document.getElementById('pageTitle').textContent = pageTitle;
+      document.title = pageTitle;
+
+      // Description
+      document.getElementById('metaDesc').setAttribute('content', blog.excerpt);
+
+      // Canonical
+      document.getElementById('canonicalTag').setAttribute('href', fullUrl);
+
+      // Open Graph
+      document.getElementById('ogUrl').setAttribute('content', fullUrl);
+      document.getElementById('ogTitle').setAttribute('content', pageTitle);
+      document.getElementById('ogDesc').setAttribute('content', blog.excerpt);
+      document.getElementById('ogImage').setAttribute('content', coverImg);
+      document.getElementById('ogPublished').setAttribute('content', blog.date);
+
+      // Twitter Card
+      document.getElementById('twTitle').setAttribute('content', pageTitle);
+      document.getElementById('twDesc').setAttribute('content', blog.excerpt);
+      document.getElementById('twImage').setAttribute('content', coverImg);
+
+      // ── BlogPosting Schema.org JSON-LD ──
+      const schemaScript = document.createElement('script');
+      schemaScript.type = 'application/ld+json';
+      schemaScript.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        'headline': blog.title,
+        'description': blog.excerpt,
+        'url': fullUrl,
+        'image': coverImg,
+        'datePublished': blog.date,
+        'dateModified': blog.date,
+        'inLanguage': 'en',
+        'author': {
+          '@type': 'Person',
+          '@id': 'https://kanishkbhardwaj.com/#person',
+          'name': 'Kanishk Bhardwaj',
+          'url': 'https://kanishkbhardwaj.com'
+        },
+        'publisher': {
+          '@type': 'Person',
+          '@id': 'https://kanishkbhardwaj.com/#person',
+          'name': 'Kanishk Bhardwaj',
+          'url': 'https://kanishkbhardwaj.com'
+        },
+        'mainEntityOfPage': {
+          '@type': 'WebPage',
+          '@id': fullUrl
+        },
+        'keywords': blog.tag + ', Kanishk Bhardwaj, AI Developer, Vibe Coder'
+      });
+      document.head.appendChild(schemaScript);
+
     } else {
       document.getElementById('articleTitle').textContent = 'Post not found';
       document.getElementById('articleBody').innerHTML =
         '<p>This post doesn\'t exist. <a href="index.html#blog">Go back to the blog.</a></p>';
     }
 
-    // ── Reading Controls ──
+    // ─── Reading Controls ───
     function setTheme(theme) {
       const page = document.getElementById('readingPage');
       page.classList.remove('theme-light', 'theme-dark');
@@ -117,7 +217,7 @@
       document.querySelector('[data-tone="' + tone + '"]').classList.add('active');
     }
 
-    // ── Toggle controls panel ──
+    // ─── Toggle controls panel ───
     document.getElementById('controlsToggle').addEventListener('click', () => {
       document.getElementById('readingControls').classList.toggle('open');
     });

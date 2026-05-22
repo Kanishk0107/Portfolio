@@ -1,0 +1,17 @@
+# ═══════════════════════════════════════════
+# KANISHK BHARDWAJ — robots.txt
+# Domain: https://kanishkbhardwaj.com
+# ═══════════════════════════════════════════
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Block nothing — full portfolio should be indexed
+Disallow:
+
+# ─── Sitemap Location ───
+Sitemap: https://kanishkbhardwaj.com/sitemap.xml
+
+# ─── Crawl Delay (optional, keeps server friendly) ───
+Crawl-delay: 1
