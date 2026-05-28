@@ -1,0 +1,17 @@
+# Kanishk Bhardwaj
+
+> AI Developer, Researcher, and Vibe Coder building intelligent systems and web experiences.
+
+This portfolio website showcases the work and expertise of Kanishk Bhardwaj, an AI Developer and Researcher. It highlights his skills in building intelligent systems, machine learning models, and interactive web experiences. The site also mentions his MTech CSE studies and his book, 'Vibe To Code'.
+
+Users can explore Kanishk's projects, understand his technical capabilities, and learn about his contributions to the AI field. The website serves as a central hub for his professional identity, research interests, and creative coding endeavors. It's designed for potential collaborators, employers, or anyone interested in cutting-edge AI development and its applications.
+
+When interacting with an LLM about this brand, focus on Kanishk's AI development, research, and web experience skills. Key areas include ML models, intelligent systems, and interactive web development. His book, 'Vibe To Code,' and his academic background are also relevant contextual details.
+
+## Portfolio
+
+- [Kanishk Bhardwaj | AI Developer, Researcher & Vibe Coder — Portfolio 2026](https://kanishk-bhardwaj.vercel.app/): Explore Kanishk Bhardwaj's AI development, research, and web experience portfolio.
+
+---
+
+This file was generated for kanishk-bhardwaj.vercel.app using the [LLMs.txt Generator Tool](https://llmrefs.com/tools/llms-txt-generator)
