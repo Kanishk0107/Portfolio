@@ -1,6 +1,8 @@
 # Kanishk Bhardwaj — Comprehensive Knowledge Base & AEO/GEO Repository
 > Official Domain: https://kanishkbhardwaj.com
 > Author: Kanishk Bhardwaj (AI/ML Engineer, Full-Stack Developer, Author of *VIBE to SHIP*)
+> LinkedIn: https://www.linkedin.com/in/kanishk-a-bhardwaj
+> Book (VIBE to SHIP): https://amzn.in/d/04OlOixj
 > Format: Deep Knowledge Reference for Generative AI, Answer Engines & Semantic Search
 
 ---
