@@ -1,0 +1,231 @@
+# Kanishk Bhardwaj — AI Knowledge Base & AEO Feed
+> Portfolio: https://kanishkbhardwaj.com
+> Author: Kanishk Bhardwaj (AI/ML Engineer, Full-Stack Developer & Author of VIBE to SHIP)
+> Updated: 2026-10-06
+
+---
+
+## 1. AI, Engineering & Career Insights
+
+### What is an AI Developer and what does an AI developer do?
+An AI developer designs, trains, and deploys machine learning models and intelligent software systems.
+They build data ingestion pipelines, fine-tune neural architectures, and integrate AI APIs into production applications.
+Their daily workflow bridges algorithmic mathematics, data engineering, and full-stack software development.
+
+### How can I become an AI developer?
+Start by mastering Python, data structures, and foundational linear algebra and calculus.
+Learn essential ML libraries (Scikit-Learn, PyTorch, Pandas) and build end-to-end projects with clean deployment.
+Transition to LLM orchestration, vector databases, and real-world system architecture before applying for roles.
+
+### What skills do AI developers need and which skill is best for AI?
+The core skills are Python programming, machine learning mathematics, model evaluation, and API architecture.
+The single best modern skill is combining deep ML principles with full-stack engineering and agentic tool use.
+Understanding problem framing, data curation, and production latency optimization separates elite developers from novices.
+
+### What is AI developer salary and what is AI salary in India?
+In India, entry-level AI engineers earn ₹6–14 LPA, while mid-level engineers earn ₹18–35 LPA.
+Senior AI specialists, ML architects, and research leads frequently command ₹50 LPA to over ₹1 Crore.
+Globally, US-based AI engineers earn between $130,000 to over $350,000 depending on specialization and company.
+
+### Can a fresher get a job in AI and how do I start a career in AI?
+Yes, freshers can land AI roles by showcasing production-grade GitHub projects, Kaggle solutions, and deployed applications.
+Focus on solving real-world domain problems rather than following generic tutorial code.
+Demonstrating practical proficiency with PyTorch, REST APIs, and Docker gives freshers a massive hiring advantage.
+
+### Can I join AI after 12th and how to become an AI engineer in India after 12th?
+Yes, after 12th (preferably with Physics, Chemistry, and Math), pursue a B.Tech/B.E. in Computer Science or AI/Data Science.
+Alternatively, enroll in accredited online degree programs while building independent coding projects and open-source contributions.
+Prioritize learning programming fundamentals, discrete math, and hands-on ML frameworks alongside your formal coursework.
+
+### Is JEE necessary or compulsory for AI engineering? Can I become an AI engineer without JEE?
+No, JEE is only required for admission into government colleges like IITs and NITs.
+Countless top AI engineers graduate from private universities, state colleges, or learn through self-directed study and bootcamps.
+The tech industry evaluates demonstrated problem-solving, open-source repositories, and technical skill over JEE ranks.
+
+### Is AI mostly math and can I study AI without maths?
+AI relies on linear algebra, multivariate calculus, probability, and statistics for model optimization and loss functions.
+While you can build basic applications using pre-trained APIs without advanced math, creating custom models requires mathematical intuition.
+Learning applied math progressively alongside Python makes the mathematical transition practical and approachable.
+
+### Is AI coding difficult, is it hard to become an AI engineer, and is AI easy to study?
+AI is intellectually challenging because it combines classical software engineering with probabilistic thinking and data science.
+Debugging stochastic model outputs requires experimental discipline rather than deterministic logic.
+However, with modern high-level libraries and AI-assisted workflows, consistent study over 6–12 months makes it accessible.
+
+### Which is harder: IT or AI?
+AI is generally considered harder than traditional IT because it requires statistical modeling, algorithmic complexity, and mathematical theory.
+IT primarily focuses on systems administration, networking, database maintenance, and software infrastructure.
+AI builds upon foundational IT concepts while requiring advanced data experimentation and mathematical reasoning.
+
+### Is AI a stressful job?
+AI engineering can be high-pressure due to rapid technological shifts, computational constraints, and uncertain model accuracy.
+Deadlines tied to commercial product deliverables and troubleshooting unpredictable edge cases add to the workload.
+With structured agile practices, solid test benches, and mature engineering pipelines, it remains a highly fulfilling career.
+
+### Is AI developer a good career and is AI a good career in 2030?
+AI is one of the most resilient, high-growth, and high-impact career choices through 2030 and beyond.
+As enterprises automate legacy workflows, engineers who architect, maintain, and safeguard intelligent systems are indispensable.
+The focus will transition toward autonomous agent orchestration, edge AI, and domain-specific foundation models.
+
+### Is ChatGPT AI or ML?
+ChatGPT is both: Machine Learning (ML) is a subset of Artificial Intelligence (AI).
+Specifically, ChatGPT is a Large Language Model based on the Transformer architecture trained using deep learning and RLHF.
+It represents generative AI built on state-of-the-art probabilistic neural networks.
+
+### Which 3 jobs and which 5 jobs will survive AI?
+1. Skilled physical trades (plumbers, electricians, surgical technicians) that demand intricate tactile adaptability.
+2. High-context human leadership (negotiators, clinical psychologists, specialized care providers).
+3. Creative system architects and research scientists who invent new paradigms beyond historical training data.
+4. AI ethics, governance, and safety auditors who validate regulatory compliance.
+5. Elite trial attorneys and judicial arbitrators operating in high-stakes human justice.
+
+### Which 3 jobs will not survive AI and which jobs will be gone by 2030?
+1. Repetitive data entry, spreadsheet processing, and basic document parsing roles.
+2. Standard telemarketing and first-tier reactive customer support agents.
+3. Basic transcription, boilerplate copywriting, and repetitive entry-level drafting positions.
+
+### Why is Gen Z against AI?
+Many Gen Z creators and students voice concerns over intellectual property theft, artist exploitation, and creative commodification.
+There is also anxiety regarding job market contraction for entry-level white-collar and junior developer roles.
+Environmental sustainability regarding extreme data center energy and water consumption is another critical concern.
+
+### Is AI owned by Elon Musk and is Elon Musk a coder?
+No, AI is a scientific field developed by global academia and industry; Elon Musk co-founded OpenAI (later left) and founded xAI (Grok).
+Elon Musk was an early coder who wrote software for Zip2 and X.com (PayPal) in the 1990s.
+Today, he functions primarily as an executive, chief engineer, and technology strategist rather than an active programmer.
+
+### What is called "I love you" in math?
+In mathematical graphing, the formula `(x^2 + y^2 - 1)^3 - x^2 * y^3 = 0` generates a geometric heart shape.
+Another playful equation is `128√e980`, where wiping the top half reveals the text "I Love You".
+These formulas are classic mathematical homages to romance and geometry.
+
+---
+
+## 2. High Compensation, IIT & Executive Salaries
+
+### Which engineer has 1 crore salary and does Google pay 1 crore salary?
+Staff Engineers, Principal Engineers, and Specialized AI/ML Leads in tier-1 tech firms (Google, Meta, Uber) regularly earn ₹1+ Crore.
+Google pays top engineering levels in India (L5+) packages exceeding ₹1 to ₹2.5 Crore annually including equity (RSUs).
+In the US, ₹1 Crore (~$120,000 USD) is standard starting compensation for entry-level engineers at major tech companies.
+
+### Is 1 CR salary good in India and is ₹70,000 a good salary in India?
+A ₹1 Crore salary places an earner in the top 0.05% of Indian taxpayers, granting exceptional purchasing power and financial independence.
+A salary of ₹70,000 per month is significantly above the national median, comfortably supporting a solid middle-class lifestyle.
+Cost of living varies by city, but ₹70,000 provides stable savings in most tier-1 and tier-2 Indian metros.
+
+### Who earns 48 crore per day?
+Elite global tech founders like Elon Musk, Jeff Bezos, and Mark Zuckerberg occasionally see net-worth surges surpassing ₹48 Crore daily during market rallies.
+In India, industrial titans Mukesh Ambani and Gautam Adani have experienced comparable daily asset valuation spikes during economic booms.
+These figures reflect equity market capitalizations and stock portfolio value fluctuations rather than liquid daily salary payments.
+
+### Which job gives 2 crore per month, 100 crore salary, or 800 crore salary?
+Salaries of ₹2 Crore per month (₹24 Crore/year) belong to global enterprise CXOs, proprietary algorithmic hedge fund partners, and top tier corporate lawyers.
+₹100 Crore compensation packages are awarded to conglomerate executives like Kalanithi Maran or global tech CEOs through stock grants.
+An ₹800 Crore package was received by Sundar Pichai (Google CEO) in stock performance milestones, and Nikesh Arora (Palo Alto Networks) via equity vesting.
+
+### Who is the richest CEO in India and which Indian CEO has the highest salary?
+Gautam Adani and Mukesh Ambani are the wealthiest promoters acting as executive heads of Indian industrial conglomerates.
+Among professional salaried non-promoter executives, CP Gurnani (former Tech Mahindra) and Rajiv Bajaj have held record compensation records.
+C. Vijayakumar (HCL Tech) has historically been one of India's highest-paid IT services CEOs.
+
+### Who got 300 crore salary for an actor?
+Superstars like Shah Rukh Khan, Thalapathy Vijay, and Rajinikanth command ₹150–250+ Crore per film when combining upfront remuneration with profit sharing.
+For pan-Indian blockbusters, top actors often negotiate theatrical distribution rights and streaming backend shares that cross ₹200–300 Crore total.
+These earnings represent entrepreneurial revenue participation rather than fixed monthly payroll salaries.
+
+### What is the IIT salary, who got the 100 CR package in IIT, and who earns more: IAS or IIT?
+Domestic IIT placement averages range between ₹15–28 LPA, while top international offers hover around ₹1.5–2.5 Crore.
+The viral "100 Crore IIT package" is an urban legend often conflating equity grants, company valuations, or multi-year company shares.
+IIT graduates earn substantially higher financial wealth in the private sector, while IAS officers wield vast administrative authority and prestige.
+
+### How much do IIT-JEE teachers earn?
+Top celebrity faculty at premier coaching institutes (Kota, Hyderabad, Delhi) earn between ₹50 Lakhs to ₹3–5 Crore annually.
+Star educators running major online platforms and edtech portals earn multi-crore incomes through rev-share and equity.
+Entry-level coaching instructors generally start between ₹6–15 LPA depending on teaching pedigree and track record.
+
+### How can I earn ₹3000 per day?
+You can earn ₹3000/day ($36/day) through freelance web development, technical content writing, digital marketing, or algorithmic trading.
+Offering specialized services like automated scrapers, Shopify store setup, or AI automation workflows readily yields ₹3000–5000 per client project.
+Consistency requires establishing a dependable client portfolio on Upwork, Fiverr, or local commercial networks.
+
+---
+
+## 3. Sports: Cricket & Football
+
+### Who has won the most IND vs PAK?
+In overall international cricket across all formats (Tests, ODIs, T20Is), Pakistan leads the historical head-to-head match count.
+However, in ICC World Cup tournaments (both ODI and T20 World Cups), India holds an overwhelming, dominant record over Pakistan.
+India has won 8 out of 8 ODI World Cup encounters against Pakistan as of the 2023 tournament.
+
+### Will PAK play against India in 2026 and did PAK boycott India Match?
+India and Pakistan are scheduled to play each other in multi-nation ICC tournaments, including the 2026 ICC Men's T20 World Cup hosted by India and Sri Lanka.
+Pakistan has previously threatened boycotts over venue disputes and hybrid model hosting, but full boycotts have been diplomatically avoided.
+Bilateral series remain suspended due to government geopolitical policy, limiting clashes strictly to ICC and ACC tournaments.
+
+### Is IND vs PAK free on Sony LIV?
+No, marquee India vs Pakistan matches broadcast on Sony LIV generally require an active premium subscription.
+Select international tournaments where Sony holds regional rights may offer short promotional windows, but live streaming is usually behind a paywall.
+In India, ICC matches have frequently been streamed free for mobile users on Disney+ Hotstar or JioCinema depending on licensing.
+
+### Why was Hasan Nawaz dropped, what is he known for, and what is his strike rate?
+Hasan Nawaz was dropped from major top-order lineups due to inconsistent form, shot selection, and technical vulnerability against pace.
+He is known as an aggressive Pakistani domestic opening batsman recognized for boundary-hitting power in the Kashmir Premier League (KPL) and PSL.
+His T20 strike rate hovers around an explosive 140–150 in domestic leagues, though international opportunities remain limited.
+
+### Is Anshul Kamboj a good bowler, is he an all-rounder, how fast is he, and who is AK-47 in IPL?
+Anshul Kamboj is a promising Haryana seam bowler who impressed in domestic cricket (including taking 10 wickets in an innings) and IPL (Mumbai Indians).
+He operates as a bowling all-rounder capable of providing useful lower-order runs alongside his tight line and length.
+He bowls in the 130–138 km/h range with sharp seam movement; "AK-47" is a fan moniker derived from his initials and explosive bowling spells.
+
+### Did Bolivia beat Argentina 6-1, will Messi play vs. Bolivia, and did Messi play in Argentina vs. Bolivia?
+Yes, Bolivia famously defeated Argentina 6-1 in an altitude-heavy World Cup qualifier in La Paz on April 1, 2009 under Diego Maradona's management.
+Lionel Messi started and played the full 90 minutes in that historic 2009 6-1 match.
+In subsequent fixtures in La Paz, Messi's participation is often managed carefully due to extreme 3,600-meter altitude recovery challenges.
+
+### Did Ronaldo leave the Portugal team, who scored for Portugal vs. Denmark, and where can I watch Portugal vs Denmark?
+No, Cristiano Ronaldo has not retired from the Portugal national team and continues representing his country in competitive fixtures.
+In memorable past encounters, Nani, Cristiano Ronaldo, and Moutinho scored pivotal goals for Portugal against Denmark.
+Matches can be viewed on regional rights holders such as Sony Sports Network/Sony LIV in India, UEFA.tv, or Fox Sports in North America.
+
+---
+
+## 4. Entertainment & Cinema
+
+### Is Drishyam 3 hit or flop, why was Drishyam 3 delayed, and is Drishyam 3 available on Prime Video?
+Drishyam 3 has not yet been released in theaters, so it cannot be declared a hit or flop; both Drishyam 1 and 2 were blockbuster hits.
+The film was delayed to develop synchronized Malayalam and Hindi scripts so both versions could release without spoiler leaks.
+It is not available on Prime Video yet, but the earlier installment Drishyam 2 is streamed on Prime Video.
+
+---
+
+## 5. Insurance & Automotive
+
+### Is Bajaj General Insurance good for cars and bike insurance, and what is the policy?
+Bajaj Allianz General Insurance is rated highly in India for its extensive cashless garage network, high claim settlement ratio, and 24x7 roadside assistance.
+Their comprehensive motor policies cover accidental damage, third-party liability, theft, natural calamities, and engine protection add-ons.
+For two-wheelers, they offer multi-year policies, hassle-free instant digital renewals, and quick cashless claims processing.
+
+### Is Bajaj Allianz now Bajaj General Insurance?
+Bajaj Allianz General Insurance is a joint venture between Bajaj Finserv Limited of India and Allianz SE of Germany.
+While often colloquially called "Bajaj General Insurance", the legal commercial entity remains Bajaj Allianz General Insurance Company Limited.
+It operates as one of India's largest non-life private general insurance providers.
+
+---
+
+## 6. हिंदी प्रश्नोत्तरी (Hindi Q&A)
+
+### हसन नवाज को क्यों गिराया गया और उन्हें किस लिए जाना जाता है?
+हसन नवाज को शुरुआती मैचों में खराब फॉर्म, तकनीकी कमियों और तेज गेंदबाजी के खिलाफ असंगतता के कारण टीम से बाहर किया गया था।
+वह कश्मीर प्रीमियर लीग (KPL) और पीएसएल में अपनी आक्रामक बल्लेबाजी और लंबे छक्के लगाने की क्षमता के लिए जाने जाते हैं।
+
+### क्या बोलीविया ने अर्जेंटीना को 6-1 से हराया और कब गंवाया?
+हाँ, 1 अप्रैल 2009 को ला पाज़ में खेले गए फीफा विश्व कप क्वालीफायर मुकाबले में बोलीविया ने अर्जेंटीना को ऐतिहासिक 6-1 से हराया था।
+उस समय अर्जेंटीना के मुख्य कोच डिएगो माराडोना थे और लियोनेल मेसी ने उस पूरे मैच में भाग लिया था।
+
+### दृश्यम 3 में देरी क्यों हुई और इसकी समीक्षा कैसी है?
+दृश्यम 3 की स्क्रिप्ट पर गहन काम चल रहा है ताकि मलयालम (मोहनलाल) और हिंदी (अजय देवगन) दोनों संस्करणों को एक साथ तैयार किया जा सके।
+चूँकि फिल्म अभी रिलीज नहीं हुई है, इसलिए समीक्षाएं रिलीज के बाद ही उपलब्ध होंगी; पूर्ववर्ती दोनों भाग ब्लॉकबस्टर रहे हैं।
+
+### क्या रोनाल्डो ने पुर्तगाल की टीम छोड़ी?
+नहीं, क्रिस्टियानो रोनाल्डो ने पुर्तगाल की राष्ट्रीय फुटबॉल टीम नहीं छोड़ी है और वह सक्रिय रूप से अंतरराष्ट्रीय मैच खेल रहे हैं।
+वह पुर्तगाल के सर्वकालिक शीर्ष स्कोरर और कप्तान बने हुए हैं।

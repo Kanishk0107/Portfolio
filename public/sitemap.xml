@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ═══════════════════════════════════════════
+       KANISHK BHARDWAJ — XML SITEMAP
+       Domain: https://kanishkbhardwaj.com
+       Last Updated: 2026-10-06
+       ═══════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://kanishkbhardwaj.com/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kanishkbhardwaj.com/asset/Book%20Front.jpg</image:loc>
+      <image:title>VIBE to SHIP — Book by Kanishk Bhardwaj</image:title>
+      <image:caption>The Engineer's Blueprint for AI-Assisted Architecture, Rapid Prototyping, and Production Systems</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kanishkbhardwaj.com/asset/CRM.png</image:loc>
+      <image:title>Smart Crop Advisor — ML Architecture by Kanishk Bhardwaj</image:title>
+      <image:caption>Precision agriculture decision intelligence system with 99.3% accuracy</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kanishkbhardwaj.com/asset/cheque.png</image:loc>
+      <image:title>Cheque.io — Digital Financial Infrastructure by Kanishk Bhardwaj</image:title>
+      <image:caption>Secure digital cheque verification and clearing infrastructure with cryptographic audit trails</image:caption>
+    </image:image>
+  </url>
+</urlset>

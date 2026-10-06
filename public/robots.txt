@@ -1,0 +1,97 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# ROBOTS.TXT — ADVANCED SEO, AEO & GEO CRAWLER CONFIGURATION
+# Site: https://kanishkbhardwaj.com
+# Maintained for Google, Bing, AI Search & Knowledge Engines
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── 1. GLOBAL SEARCH ENGINE DIRECTIVES (Google, Bing, Yahoo, DuckDuckGo) ──────
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /.agent/
+Disallow: /dist/
+
+# ── 2. AI SEARCH & ANSWER ENGINES (AEO / GEO Optimization) ───────────────────
+# OpenAI ChatGPT & SearchGPT
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+User-agent: Claude-Web
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Perplexity AI Engine
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Google Gemini / Vertex / Search Generative Experience
+User-agent: Google-Extended
+User-agent: GoogleOther
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (Foundation model training datasets)
+User-agent: CCBot
+Allow: /
+
+# Meta AI & Llama Web Crawlers
+User-agent: FacebookBot
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# ByteDance / TikTok Research
+User-agent: Bytespider
+Allow: /
+
+# Diffbot Knowledge Graph
+User-agent: Diffbot
+Allow: /
+
+# ── 3. STANDARD SEARCH CRAWLERS ──────────────────────────────────────────────
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: Bingbot
+User-agent: msnbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# ── 4. SITEMAPS & LLM KNOWLEDGE FEEDS ─────────────────────────────────────────
+Sitemap: https://kanishkbhardwaj.com/sitemap.xml
+
+# LLM Direct Knowledge Context
+# Standard: https://llmstxt.org/ specification
+# Compact Summary:
+# https://kanishkbhardwaj.com/llms.txt
+# Comprehensive Knowledge:
+# https://kanishkbhardwaj.com/llms-full.txt
